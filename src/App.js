@@ -1,26 +1,39 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect } from "react";
+import { connect } from "react-redux";
+import { getPosts, getPost } from "./store/actions/postAction";
+import Post from "./components/Post";
 
-function App() {
+const App = (props) => {
+  useEffect(() => {
+    props.getPosts();
+    props.getPost("1");
+  });
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <label>Get Single Post</label>
+      <Post title={props.post.title} body={props.post.body} />
+
+      <br />
+      <br />
+      <br />
+
+      <label>Get All Posts</label>
+      {props.posts.map((post) => (
+        <Post title={post.title} body={post.body} />
+      ))}
     </div>
   );
-}
+};
 
-export default App;
+const mapStateToProps = (state) => ({
+  posts: state.post.posts,
+  post: state.post.post,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  getPosts: () => dispatch(getPosts()),
+  getPost: (id) => dispatch(getPost(id)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
