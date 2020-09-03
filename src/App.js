@@ -7,12 +7,12 @@ const App = (props) => {
   useEffect(() => {
     props.getPosts();
     props.getPost("1");
-  });
+  }, []);
 
   return (
     <div>
       <label>Get Single Post</label>
-      <Post title={props.post.title} body={props.post.body} />
+      <Post title={props.post.title} body={props.post.body}/>
 
       <br />
       <br />
@@ -20,7 +20,7 @@ const App = (props) => {
 
       <label>Get All Posts</label>
       {props.posts.map((post) => (
-        <Post title={post.title} body={post.body} />
+        <Post title={post.title} body={post.body} key={post.id}/>
       ))}
     </div>
   );

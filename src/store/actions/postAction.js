@@ -15,15 +15,15 @@ export const getPosts = () => (dispatch) => {
 };
 
 export const getPost = (id) => (dispatch) => {
-    fetch("https://jsonplaceholder.typicode.com/posts/" + id)
-      .then((response) => response.json())
-      .then((data) => {
-        dispatch({
-          type: GET_POST,
-          payload: data,
-        });
-      })
-      .catch((e) => {
-        console.error("getPosts() error: " + e);
+  fetch("https://jsonplaceholder.typicode.com/posts/" + id)
+    .then((response) => response.json())
+    .then((data) => {
+      dispatch({
+        type: GET_POST,
+        payload: data,
       });
-  };
+    })
+    .catch((e) => {
+      console.error("getPosts() error: " + e);
+    });
+};
