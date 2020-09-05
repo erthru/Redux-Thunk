@@ -3,24 +3,24 @@ import { connect } from "react-redux";
 import { getPosts, getPost } from "./store/actions/postAction";
 import Post from "./components/Post";
 
-const App = (props) => {
+const App = ({ posts, post, getPosts, getPost }) => {
   useEffect(() => {
-    props.getPosts();
-    props.getPost("1");
+    getPosts();
+    getPost("1");
   }, []);
 
   return (
     <div>
       <label>Get Single Post</label>
-      <Post title={props.post.title} body={props.post.body}/>
+      <Post title={post.title} body={post.body} />
 
       <br />
       <br />
       <br />
 
       <label>Get All Posts</label>
-      {props.posts.map((post) => (
-        <Post title={post.title} body={post.body} key={post.id}/>
+      {posts.map((post) => (
+        <Post title={post.title} body={post.body} key={post.id} />
       ))}
     </div>
   );
